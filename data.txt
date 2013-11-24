@@ -1,0 +1,13 @@
+list (id)
+    title
+    creator
+    date created
+    date updated
+    due date
+    items
+    status
+
+item (id)
+    name
+    description
+    status (undone, in-progress, done, deleted)

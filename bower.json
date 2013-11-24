@@ -1,0 +1,8 @@
+{
+  "name": "Packlist",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "~1.2.2"
+  }
+}
