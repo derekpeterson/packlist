@@ -1,8 +1,9 @@
 {
-  "name": "Packlist",
-  "version": "0.0.1",
-  "dependencies": {},
-  "devDependencies": {
-    "angular": "~1.2.2"
-  }
+    "name": "Packlist",
+    "author": "derekpetey@gmail.com",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular": "~1.2"
+    },
+    "devDependencies": {}
 }
