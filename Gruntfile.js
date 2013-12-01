@@ -5,6 +5,35 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        src: {
+            bowerDir: 'bower_components',
+            bowerJson: grunt.file.readJSON('bower.json'),
+            css: 'css',
+            cssWatch: ['css/*.css'],
+            js: 'app/js',
+            jsWatch: ['<%= src.js %>/packlist/*.js'],
+            less: 'app/less',
+            lessWatch: ['<%= src.less %>/**/*.less']
+        },
+
+        concat: {
+            options: {
+                separator: '\n'
+            },
+            dist: {
+                dest: '<%= src.js %>/packlist.js',
+                src: [
+                    '<%= src.js %>/app/app.js'
+                ]
+            },
+            angular: {
+                dest: '<%= src.js %>/lib/angular.js',
+                src: [
+                    '<%= src.bowerDir %>/angular/angular.js'
+                ]
+            }
+        },
+
         concurrent: {
             target: {
                 tasks: [
@@ -25,10 +54,10 @@ module.exports = function (grunt) {
         less: {
             dev: {
                 options: {
-                    paths: ['less']
+                    paths: ['<%= src.less %>']
                 },
                 files: {
-                    'css/style.css': 'less/packlist.less'
+                    'css/style.css': '<%= src.less %>/packlist.less'
                 }
             },
             production: {
@@ -38,7 +67,7 @@ module.exports = function (grunt) {
                     paths: ['less']
                 },
                 files: {
-                    'css/style.min.css': 'less/packlist.less'
+                    'css/style.min.css': '<%= src.less %>/packlist.less'
                 }
             }
         },
@@ -70,7 +99,7 @@ module.exports = function (grunt) {
                     angular: true
                 }
             },
-            src: ['js']
+            src: ['<%= src.js %>']
         },
 
         watch: {
@@ -81,11 +110,11 @@ module.exports = function (grunt) {
                 files: ['css/**/*', 'js/**/*']
             },
             less: {
-                files: 'less/**/*.less',
+                files: '<%= src.less %>/**/*.less',
                 tasks: ['less']
             },
             js: {
-                files: 'js/**/*.js',
+                files: '<%= src.js %>/**/*.js',
                 tasks: []
             }
         }
