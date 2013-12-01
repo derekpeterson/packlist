@@ -8,13 +8,17 @@ module.exports = function (grunt) {
         concurrent: {
             target: {
                 tasks: [
-                    // 'watch',
                     'less',
                     'jshint'
-                ],
-                options: {
-                    logConcurrentOutput: true
-                }
+                ]
+            },
+            dev: {
+                tasks: [
+                    'watch'
+                ]
+            },
+            options: {
+                logConcurrentOutput: true
             }
         },
 
@@ -82,7 +86,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: 'js/**/*.js',
-                tasks: ['jshint']
+                tasks: []
             }
         }
     });
@@ -94,6 +98,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [
         'concurrent:target'
+    ]);
+
+    grunt.registerTask('dev', [
+        'concurrent:dev'
     ]);
 
 };
