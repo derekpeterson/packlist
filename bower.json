@@ -1,9 +1,12 @@
 {
-    "name": "Packlist",
-    "author": "derekpetey@gmail.com",
-    "version": "0.0.1",
-    "dependencies": {
-        "angular": "~1.2"
-    },
-    "devDependencies": {}
+  "name": "Packlist",
+  "author": "derekpetey@gmail.com",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-ui-router": "~0.2.0",
+    "bootstrap": "~3.0.2",
+    "angular-route": "~1.2.3"
+  },
+  "devDependencies": {}
 }

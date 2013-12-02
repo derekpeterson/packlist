@@ -1,0 +1,7 @@
+<ul class="packlist-admin-list" ng-show="lists.length">
+    <li class="packlist-admin-item" ng-repeat="list in lists">
+        <a class="packlist-admin-link" ng-bind="list.title" ui-sref="packlist.list({ id: list.id })"></a>
+    </li>
+</ul>
+<div class="alert alert-info" ng-hide="lists.length">Looks like you don't have any lists yet.</div>
+<a class="btn btn-primary" href="#/create">Create a new Packlist</a>

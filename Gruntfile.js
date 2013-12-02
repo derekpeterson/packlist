@@ -24,13 +24,16 @@ module.exports = function (grunt) {
             dist: {
                 dest: '<%= src.js %>/packlist.js',
                 src: [
-                    '<%= src.js %>/packlist/*.js'
+                    '<%= src.js %>/packlist/app.js',
+                    '<%= src.js %>/packlist/directives.js',
+                    '<%= src.js %>/packlist/controllers.js'
                 ]
             },
             angular: {
                 dest: '<%= src.js %>/lib/angular.js',
                 src: [
-                    '<%= src.bowerDir %>/angular/angular.js'
+                    '<%= src.bowerDir %>/angular/angular.js',
+                    '<%= src.bowerDir %>/angular-route/angular-route.min.js'
                 ]
             }
         },
@@ -116,8 +119,8 @@ module.exports = function (grunt) {
                 tasks: ['less']
             },
             js: {
-                files: '<%= src.js %>/**/*.js',
-                tasks: []
+                files: '<%= src.js %>/packlist/*.js',
+                tasks: ['concat:dist']
             }
         }
     });
@@ -133,6 +136,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('dev', [
+        'concurrent:target',
         'concurrent:dev'
     ]);
 

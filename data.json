@@ -1,0 +1,20 @@
+{
+    "id": 1,
+    "title": "Philadelphia",
+    "created": 1385947113488,
+    "updated": 1385947113488,
+    // "due": 1386327600000,
+    "items": [
+        {
+            "name": "Underwear",
+            // "description": "Enough underwear for a weekend",
+            "done": false
+        },
+        {
+            "name": "Contact solution",
+            // "description": "Contact solution",
+            "done": true
+        }
+    ],
+    "done": false
+}

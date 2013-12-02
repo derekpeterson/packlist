@@ -1,24 +1,17 @@
-<html data-ng-app="gDriveApp">
+<!doctype html>
+<html ng-app="packlist" ng-csp>
 <head>
+    <meta charset="utf-8">
+    <title>Packlist</title>
     <link rel="stylesheet" href="css/style.min.css">
-    <base target="_blank">
 </head>
-<body data-ng-controller="DocsController">
-    <section id="main">
-        <nav>
-            <h2>Google Drive Uploader</h2>
-            <button class="btn" data-ng-click="fetchDocs()">Refresh</button>
-            <button id="close-button" class="btn" title="Close">x</button>
-        </nav>
-        <ul>
-            <li data-ng-repeat="doc in docs">
-                <img src="" alt="" data-ng-src="{{ doc.icon }}">
-                <a href="{{ doc.alternateLink }}" data-ng-bind="doc.title"></a>
-                <span data-ng-bind="doc.size"></span>
-                <span class="date" data-ng-bind="doc.updatedDate"></span>
-            </li>
-        </ul>
-    </section>
+<body>
+    <div class="container">
+        <main id="main">
+            <section ng-view></section>
+        </main>
+    </div>
+
     <script src="js/lib/angular.js"></script>
     <script src="js/packlist.js"></script>
 </body>
