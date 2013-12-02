@@ -1,0 +1,23 @@
+<html data-ng-app="gDriveApp">
+<head>
+    <link rel="stylesheet" href="../css/style.min.css">
+    <base target="_blank">
+</head>
+<body data-ng-controller="DocsController">
+    <section id="main">
+        <nav>
+            <h2>Google Drive Uploader</h2>
+            <button class="btn" data-ng-click="fetchDocs()">Refresh</button>
+            <button id="close-button" class="btn" title="Close">x</button>
+        </nav>
+        <ul>
+            <li data-ng-repeat="doc in docs">
+                <img src="" alt="" data-ng-src="{{ doc.icon }}">
+                <a href="{{ doc.alternateLink }}" data-ng-bind="doc.title"></a>
+                <span data-ng-bind="doc.size"></span>
+                <span class="date" data-ng-bind="doc.updatedDate"></span>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>

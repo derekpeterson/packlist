@@ -1,11 +1,11 @@
-chrome.app.runtime.onLaunched.addListener(function (launchData) {
+chrome.app.runtime.onLaunched.addListener(function ( launchData ) {
     'use strict';
     console.log(launchData);
     var size = {
         height: 600,
         width: 500
     };
-    chrome.app.window.create('../main.html', {
+    chrome.app.window.create('main.html', {
         id: 'Packlist',
         bounds: {
             height: size.height,
