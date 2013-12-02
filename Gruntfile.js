@@ -6,13 +6,14 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         src: {
+            appBase: 'app',
             bowerDir: 'bower_components',
             bowerJson: grunt.file.readJSON('bower.json'),
-            css: 'css',
-            cssWatch: ['css/*.css'],
-            js: 'app/js',
+            css: '<%= src.appBase %>/css',
+            cssWatch: ['<%= src.css %>/*.css'],
+            js: '<%= src.appBase %>/js',
             jsWatch: ['<%= src.js %>/packlist/*.js'],
-            less: 'app/less',
+            less: '<%= src.appBase %>/less',
             lessWatch: ['<%= src.less %>/**/*.less']
         },
 
@@ -23,7 +24,7 @@ module.exports = function (grunt) {
             dist: {
                 dest: '<%= src.js %>/packlist.js',
                 src: [
-                    '<%= src.js %>/app/app.js'
+                    '<%= src.js %>/packlist/*.js'
                 ]
             },
             angular: {
@@ -38,6 +39,7 @@ module.exports = function (grunt) {
             target: {
                 tasks: [
                     'less',
+                    'concat',
                     'jshint'
                 ]
             },
@@ -57,7 +59,7 @@ module.exports = function (grunt) {
                     paths: ['<%= src.less %>']
                 },
                 files: {
-                    'css/style.css': '<%= src.less %>/packlist.less'
+                    '<%= src.css %>/style.css': '<%= src.less %>/packlist.less'
                 }
             },
             production: {
@@ -67,7 +69,7 @@ module.exports = function (grunt) {
                     paths: ['less']
                 },
                 files: {
-                    'css/style.min.css': '<%= src.less %>/packlist.less'
+                    '<%= src.css %>/style.min.css': '<%= src.less %>/packlist.less'
                 }
             }
         },
@@ -99,7 +101,7 @@ module.exports = function (grunt) {
                     angular: true
                 }
             },
-            src: ['<%= src.js %>']
+            src: ['<%= src.js %>/packlist/*.js']
         },
 
         watch: {
@@ -107,7 +109,7 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['css/**/*', 'js/**/*']
+                files: ['<%= src.css %>/**/*', '<%= src.js %>/**/*']
             },
             less: {
                 files: '<%= src.less %>/**/*.less',
@@ -121,6 +123,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
