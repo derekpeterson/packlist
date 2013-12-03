@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function ( grunt ) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -26,7 +26,8 @@ module.exports = function (grunt) {
                 src: [
                     '<%= src.js %>/packlist/app.js',
                     '<%= src.js %>/packlist/directives.js',
-                    '<%= src.js %>/packlist/controllers.js'
+                    '<%= src.js %>/packlist/controllers.js',
+                    '<%= src.js %>/packlist/services.js'
                 ]
             },
             angular: {

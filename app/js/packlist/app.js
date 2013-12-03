@@ -9,7 +9,7 @@ angular.module('packlist').config(function ( $routeProvider ) {
         controller: 'AdminController'
     })
     .when('/create', {
-        templateUrl: 'html/list.html',
+        templateUrl: 'html/create.html',
         controller: 'CreateController'
     })
     .when('/list/:listId', {

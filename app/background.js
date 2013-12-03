@@ -17,4 +17,12 @@ chrome.runtime.onInstalled.addListener(function () {
 
 chrome.runtime.onSuspend.addListener(function () {
     'use strict';
+
+    chrome.storage.local.get('lists', function ( items ) {
+        chrome.storage.sync.set({
+            'lists': items
+        }, function () {
+            console.log('Items have synced');
+        });
+    });
 });

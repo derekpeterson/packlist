@@ -1,45 +1,63 @@
 angular.module('packlist')
 .controller('AdminController', [
-    '$scope',
-    function ( $scope ) {
+    '$scope', '$location', 'Storage',
+    function ( $scope, $location, storage ) {
         'use strict';
 
-        $scope.lists = [];
+        $scope.lists = {};
+
+        storage.getLists().then(function ( data ) {
+            $scope.lists = data;
+        });
+
+        $scope.goTo = function ( route ) {
+            $location.path( route );
+        };
     }
 ]);
 angular.module('packlist')
 .controller('CreateController', [
-    '$scope',
-    function ( $scope ) {
+    '$scope', '$location', 'Storage',
+    function ( $scope, $location, storage ) {
         'use strict';
 
-        var emptyItem = {
-            name: '',
-            done: false
-        };
-        var emptyList = {
-            title: '',
-            items: [angular.copy( emptyItem )],
-            done: false
-        };
-
+        var emptyItem = storage.getEmptyItem();
+        var emptyList = storage.getEmptyList();
         $scope.list = angular.copy( emptyList );
 
         $scope.addEmptyItem = function () {
-            $scope.list.items.push(angular.copy( emptyItem ));
+            var lastIndex = $scope.list.items.length - 1;
+            if ( !angular.equals( emptyItem, $scope.list.items[ lastIndex ] )) {
+                $scope.list.items.push(angular.copy( emptyItem ));
+            }
         };
 
-        $scope.createList = function () {
-            console.log($scope.list);
+        $scope.saveList = function () {
+            var length = $scope.list.items.length;
+            var lastItem = $scope.list.items[ length - 1 ];
+            if ( angular.equals( emptyItem, lastItem ) ) {
+                $scope.removeItem( lastItem );
+            }
+            storage.save( $scope.list ).then(function () {
+                $location.path('list/' + $scope.list.title );
+            });
+        };
+
+        $scope.removeItem = function ( item ) {
+            if ( $scope.list.items.length > 1 ) {
+                var index = $scope.list.items.indexOf(item);
+                $scope.list.items.splice(index, 1);
+            }
         };
     }
 ]);
 angular.module('packlist')
 .controller('ListController', [
-    '$scope', '$routeParams',
-    function ( $scope, $routeParams ) {
+    '$scope', '$routeParams', 'Storage',
+    function ( $scope, $routeParams, storage ) {
         'use strict';
+        var listId = $routeParams.listId;
 
-        $scope.list = {};
+        $scope.list = storage.getList( listId ) || {};
     }
 ]);

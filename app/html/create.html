@@ -1,0 +1,45 @@
+<h3>Create a new one</h3>
+<form ng-submit="saveList()"
+      role="form"
+      name="create_list"
+      id="create_list">
+    <div class="form-group">
+        <label class="sr-only"
+               for="list_title"
+        >List title</label>
+        <input type="text"
+               class="form-control"
+               placeholder="List title"
+               name="list_title"
+               id="list_title"
+               required
+               ng-model="list.title">
+    </div>
+</form>
+<form ng-submit="addEmptyItem()"
+      role="form"
+      class="row"
+      ng-repeat="item in list.items">
+    <div class="col-xs-9 col-lg-5 form-group">
+        <label class="sr-only"
+               for="{{ 'item_name_' + $index }}"
+        >Name</label>
+        <input type="text"
+               class="form-control"
+               placeholder="Item"
+               name="{{ 'item_name_' + $index }}"
+               id="{{ 'item_name_' + $index }}"
+               ng-model="item.name"
+               give-focus="{{ 'item_name_' + ($index + 1) }}">
+    </div>
+    <div class="col-xs-3 col-lg-1 form-group">
+        <a class="btn btn-primary form-control"
+           ng-click="removeItem(item)"
+           give-focus="{{ 'item_name_' + $index }}"
+        >Delete</a>
+    </div>
+</form>
+<button type="submit"
+        class="btn btn-primary"
+        form="create_list"
+>Save list</button>

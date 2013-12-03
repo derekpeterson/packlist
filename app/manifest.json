@@ -9,7 +9,7 @@
     "manifest_version": 2,
     "name": "Packlist",
     "version": "0.0.1",
-    "description": "An application for assembling the packing list for your next outing",
+    "description": "An application for making the packing list for your next outing",
     "icons": {},
     "oauth2": {
         "client_id": "588205410918.apps.googleusercontent.com",
@@ -19,10 +19,6 @@
     },
     "offline_enabled": true,
     "permissions": [
-        "https://docs.google.com/feeds/",
-        "https://docs.googleusercontent.com/",
-        "https://spreadsheets.google.com/feeds",
-        "https://ssl.gstatic.com/",
-        "https://www.googleapis.com/"
+        "storage"
     ]
 }
