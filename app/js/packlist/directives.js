@@ -2,9 +2,8 @@ angular.module('packlist')
 .directive('giveFocus', [
     '$timeout',
     function ( $timeout ) {
+        'use strict';
         return function ( scope, element, attrs ) {
-            'use strict';
-
             var focusTarget = attrs.giveFocus;
             var ENTER_KEY = 13;
             var events = {
@@ -18,7 +17,7 @@ angular.module('packlist')
                 var key = e.which || e.key || e.keyCode;
                 if ( eventType !== events.input || key === ENTER_KEY ) {
                     $timeout(function () {
-                        var target = document.getElementById( focusTarget )
+                        var target = document.getElementById( focusTarget );
                         return target && target.focus();
                     }, 0);
                 }

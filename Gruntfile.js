@@ -28,7 +28,13 @@ module.exports = function ( grunt ) {
                     '<%= src.js %>/packlist/directives.js',
                     '<%= src.js %>/packlist/controllers.js',
                     '<%= src.js %>/packlist/services.js'
-                ]
+                ],
+                options: {
+                    banner: "'use strict';\n",
+                    process: function ( src, filepath ) {
+                        return src.replace(/(^|\n[ \t]*)('use strict'|"use strict");?\s*/g, '$1');
+                    }
+                }
             },
             angular: {
                 dest: '<%= src.js %>/lib/angular.js',

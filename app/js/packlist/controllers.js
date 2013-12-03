@@ -38,7 +38,7 @@ angular.module('packlist')
             if ( angular.equals( emptyItem, lastItem ) ) {
                 $scope.removeItem( lastItem );
             }
-            storage.save( $scope.list ).then(function () {
+            storage.saveList( $scope.list ).then(function () {
                 $location.path('list/' + $scope.list.title );
             });
         };
