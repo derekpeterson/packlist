@@ -3,14 +3,14 @@ angular.module('packlist')
     '$q',
     function ( $q ) {
         'use strict';
-        var storageKey = 'lists';
+        var STORAGE_KEY = 'lists';
         var emptyItem = {
             name: '',
             done: false
         };
         var emptyList = {
             title: '',
-            items: [angular.copy( emptyItem )],
+            items: [ angular.copy( emptyItem ) ],
             done: false
         };
 
@@ -26,7 +26,7 @@ angular.module('packlist')
 
         function _loadLists () {
             var dfd = $q.defer();
-            chrome.storage.local.get(storageKey, function ( items ) {
+            chrome.storage.local.get(STORAGE_KEY, function ( items ) {
                 lists = _convertLists( items );
                 dfd.resolve( lists );
             });
@@ -37,10 +37,12 @@ angular.module('packlist')
             lists = change.newValue || lists;
 
             if ( namespace === 'sync' ) {
-                chrome.storage.sync.set({
-                    storageKey: lists
-                }, function () {
-                    console.log('Synced items from sync to local storage');
+
+                var config = {};
+                config[ STORAGE_KEY ] = lists;
+
+                chrome.storage.sync.set( config, function () {
+                    console.log( 'Synced items from sync to local storage' );
                 });
             }
         });
@@ -67,24 +69,21 @@ angular.module('packlist')
             saveList: function ( list ) {
                 var dfd = $q.defer();
 
-                chrome.storage.local.get(storageKey, function ( items ) {
-                    var newList = [ list ];
-                    var key = list.title;
+                chrome.storage.local.get(STORAGE_KEY, function ( items ) {
 
-                    angular.extend(lists, items.lists || {}, {
-                        key: list
+                    angular.extend( lists, items.lists || {} );
+
+                    lists[ list.title ] = list;
+
+                    var config = {};
+                    config[ STORAGE_KEY ] = lists;
+
+                    chrome.storage.local.set( config, function () {
+                        console.log( 'Packlist saved to local' );
                     });
 
-                    chrome.storage.local.set({
-                        storageKey: lists
-                    }, function () {
-                        console.log('Packlist saved to local');
-                    });
-
-                    chrome.storage.sync.set({
-                        storageKey: lists
-                    }, function () {
-                        console.log('Packlist saved to sync');
+                    chrome.storage.sync.set( config, function () {
+                        console.log( 'Packlist saved to sync' );
                     });
 
                     dfd.resolve( list.title );
