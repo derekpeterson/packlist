@@ -4,3 +4,16 @@ html {
 body {
     background: @gray-lighter;
 }
+
+.list {
+	&-item {
+		.make-row();
+
+		list-style: none;
+	}
+
+	&-item-name,
+	&-item-state {
+		.make-xs-column(6);
+	}
+}
